@@ -40,8 +40,11 @@ class Scraper
   def verify_players
     self.collect_player_names
 
-    # @names.each do |n|
-    @names[0..10].each do |n|
+    temp = @names.length - 1
+    tempa = temp - 10
+    # binding.pry
+    @names.each do |n|
+    # @names[0..10].each do |n|
       doc = self.get_player_page(n)
       if self.valid_times?(doc)
         Player.new(n, self.player_overall_time(doc))
