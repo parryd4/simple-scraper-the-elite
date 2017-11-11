@@ -14,3 +14,9 @@ The above endpoint has an object with 2 keys, "p" for points and "t" for time, w
 A user's GoldenEye time's page has a URL format of "https://rankings.the-elite.net/~USERNAME/goldeneye" and contains their personal best time for every stage. If a stage has a time of "N/A" then no time has been submitted and I can remove the user from the array.
 
 Once I have removed all users with incomplete times from the list, I will be able to user a Player Class Method to puts the slowest time in the console.
+
+# Disclaimer
+"The-elite.net is not in any way affiliated or involved with Rareware or Nintendo. Perfect Dark, GoldenEye 007, and all related material are registered trademarks of Rareware. All other content is copyright © the-elite.net 2002 - 2017.
+System developed free of charge by Ryan Dwyer."
+
+Data on The-elite.net is accessible without an account. The reason I started this scraping project was because I noticed the-elite was lacking an API, and I thought it would be a fun project to build one for them. I need data to mimic behavior and performance and so I shall scrape it.
