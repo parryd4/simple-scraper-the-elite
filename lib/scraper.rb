@@ -5,6 +5,7 @@ require 'pry'
 require_relative './player.rb'
 
 class Scraper
+  attr_accessor :names
 
   def initialize
     @names = []
@@ -22,21 +23,35 @@ class Scraper
     @names = data.values_at(* data.each_index.select{ |i| (i-1)%6 == 0})
     @names.map! { |n| n[1..-2]}
 
-    binding.pry
   end
 
-  def get_player_page
-    
+  def get_player_page(player)
+    Nokogiri::HTML(open("https://rankings.the-elite.net/~#{player}/goldeneye"))
   end
 
-  def look_for_invalid_time
+  def valid_times?(data)
+    !data.css(".time").text.include?("N/A")
+  end
 
+  def player_overall_time(data)
+    numbers = data.css(".overall").first.text.split(" ")[3]
   end
 
   def verify_players
+    self.collect_player_names
+
+    # @names.each do |n|
+    @names[0..10].each do |n|
+      doc = self.get_player_page(n)
+      if self.valid_times?(doc)
+        Player.new(n, self.player_overall_time(doc))
+      end
+    end
 
   end
 
 end
 
-Scraper.new.collect_player_names
+Scraper.new.verify_players
+# binding.pry
+Player.slowest
